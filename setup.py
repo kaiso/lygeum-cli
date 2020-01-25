@@ -29,7 +29,7 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name='lygeumcli',  # Required
-    version='0.1.0a1',  # Required
+    version='0.1.0b1',  # Required
     url='https://github.com/kaiso/lygeum-cli',
     author='Kais OMRI',  
     author_email='kais.omri.int@gmail.com',
@@ -41,11 +41,11 @@ setup(
         'Development Status :: 3 - Alpha',
 
         # Indicate who your project is intended for
-        'Intended Audience :: Developers, Architects, DevOps',
-        'Topic :: Software Architecture :: Microservices :: Configuration Tools',
+        'Intended Audience :: Information Technology',
+        'Topic :: System :: Systems Administration',
 
         # Pick your license as you wish
-        'License :: Apache Version 2',
+        'License :: OSI Approved :: Apache Software License',
 
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.5',

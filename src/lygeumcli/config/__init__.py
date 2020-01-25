@@ -48,6 +48,12 @@ class Configurator(Command):
         self.readConfig()
 
     def writeConfig(self):
+        if not os.path.exists(os.path.dirname(self.config_file)):
+          try:
+             os.makedirs(os.path.dirname(self.config_file))
+          except OSError as exc: # Guard against race condition
+             if exc.errno != errno.EEXIST:
+               raise
         with open(self.config_file, 'w') as conf:
             self.config_object.write(conf)
     

@@ -32,7 +32,7 @@ class DownloadApp(Subcommand):
   
   def main(self, app):
       params = {'env':app.params.environment, 'app':app.params.application,'layout':app.params.layout}
-      r = http.get('/properties/download',params=params)
+      r = http.get('/properties/download', params=params, verbose=app.params.verbose)
       with open(app.params.file, 'wb') as fd:
           for chunk in r.iter_content(chunk_size=128):
             fd.write(chunk)
