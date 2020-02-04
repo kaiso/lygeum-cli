@@ -29,7 +29,6 @@ class Http(object):
         configuration.validateConfig()
         payload = {'grant_type':'client_credentials', 'client_id':configuration.config_object['default']['client_id'], 'client_secret':configuration.config_object['default']['client_secret']}
         url = configuration.config_object['default']['url'] + self.token_uri
-        #result = requests.post(url=url,data=payload)
         result = self.call_api(url=url, method='post', data=payload, verbose=verbose)
         if not self.is_json(result.content):
             print('unable to login please check your configuration \n', result.content)
@@ -40,8 +39,16 @@ class Http(object):
         self.login(verbose)
         headers = {'Authorization': 'Bearer {}'.format(self.token)}
         url= configuration.config_object['default']['url'] + '/lygeum/api' + uri
-        #result = requests.get(url, headers=headers,params=params)
         result = self.call_api(url=url, method='get', headers=headers, params=params, verbose=verbose)
+        return result
+
+    def post(self, uri, data, params={}, verbose = 0):
+        self.login(verbose)
+        headers = {'Authorization': 'Bearer {}'.format(self.token)}
+        headers['Content-Type'] = 'application/json'
+        jsonData=json.dumps(data)
+        url= configuration.config_object['default']['url'] + '/lygeum/api' + uri
+        result = self.call_api(url=url, method='post', headers=headers, params=params, verbose=verbose, data=jsonData)
         return result
 
     def call_api(self, method, url, headers = {}, params = {}, data = None, verbose = 0):
@@ -49,7 +56,7 @@ class Http(object):
             if method is 'get':
                 result = requests.get(url, headers=headers,params=params)
             elif method is 'post':
-                result = requests.post(url=url, headers=headers, data=data)
+                result = requests.post(url=url, params=params, headers=headers, data=data)
             else:
                 raise ValueError('Unsupported method '+method)
         except ConnectionError as e:
@@ -61,8 +68,8 @@ class Http(object):
                 traceback.print_exception(exec_type, exec_value, exec_traceback,limit=50, file=sys.stdout)
             raise
 
-        if self.is_json(result.content) and hasattr(result.json(), 'error'):
-            print('got lygeum api error ', result.json()['message'])
+        if ( 210 < result.status_code ) :
+            print('got lygeum api error ', result.text)
             raise SystemExit()
         else:
             return result

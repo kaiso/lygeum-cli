@@ -29,7 +29,7 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name='lygeumcli',  # Required
-    version='0.1.0b1',  # Required
+    version='0.1.0b2',  # Required
     url='https://github.com/kaiso/lygeum-cli',
     author='Kais OMRI',  
     author_email='kais.omri.int@gmail.com',
@@ -116,9 +116,9 @@ setup(
     # maintainers, and where to support the project financially. The key is
     # what's used to render the link text on PyPI.
     project_urls={  # Optional
-        'Bug Reports': 'https://github.com/pypa/sampleproject/issues',
-        'Funding': 'https://donate.pypi.org',
-        'Say Thanks!': 'http://saythanks.io/to/example',
+        'Bug Reports': 'https://github.com/kaiso/lygeum-cli/issues',
+        'Funding': 'https://github.com/kaiso/lygeum-cli/',
+        'Say Thanks!': 'https://github.com/kaiso/lygeum-cli/',
         'Source': 'https://github.com/kaiso/lygeum-cli/',
     },
 )

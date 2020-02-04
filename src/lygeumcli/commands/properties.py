@@ -37,4 +37,21 @@ class DownloadApp(Subcommand):
           for chunk in r.iter_content(chunk_size=128):
             fd.write(chunk)
 
+class Update(Subcommand):
+  """Update a property for a given environment and application."""
+  name = "update"
   
+  def setup(self, parser):
+    super(Update, self).resetOptions()
+    super(Update, self).addOption('-e', '--environment', help='the target environment', required=True)
+    super(Update, self).addOption('-a', '--application', help='the target application', required=True)
+    super(Update, self).addOption('-n', '--name', help='the property name', required=True)
+    super(Update, self).addOption('-vl', '--value', help='the property value', required=True)
+    super(Update, self).setup(parser)
+  
+  def main(self, app):
+      params = {'env':app.params.environment, 'app':app.params.application}
+      data = [{'name':app.params.name, 'value':app.params.value}]
+      http.post('/properties', params=params, verbose=app.params.verbose, data=data)
+      
+

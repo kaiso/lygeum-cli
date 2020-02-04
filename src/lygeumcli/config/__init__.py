@@ -20,7 +20,7 @@ from lygeumcli.util import Command
 from pprint import pprint
 from PyInquirer import style_from_dict, Token, prompt
 from PyInquirer import Validator, ValidationError
-from configparser import ConfigParser
+from configparser import RawConfigParser
 
 
 
@@ -40,7 +40,7 @@ class UrlValidator(Validator):
 
 class Configurator(Command):
     
-    config_object = ConfigParser()
+    config_object = RawConfigParser()
     config_file = os.path.join(os.path.expanduser("~"), '.lygeum', 'credentials')
     
     def __init__(self, name, subcommands=None, help=''):

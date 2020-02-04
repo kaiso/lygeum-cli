@@ -20,13 +20,13 @@ from pprint import pprint
 from cli.log import LoggingApp
 from lygeumcli.config import configuration
 from lygeumcli.util import Command,Subcommand,getVersion
-from lygeumcli.commands.properties import DownloadApp
+from lygeumcli.commands.properties import DownloadApp, Update
 from lygeumcli.commands.environments import EnvironmentsApp
 
 
 def get_commands():
-  a = Command('properties', [ DownloadApp ], help='manage properties' )
-  c = Command('environments', [ DownloadApp, EnvironmentsApp], help='manage environments' )
+  a = Command('properties', [ DownloadApp, Update ], help='manage properties' )
+  c = Command('environments', [ EnvironmentsApp ], help='manage environments' )
   return [ a, c, configuration ]
 
 class Application(LoggingApp):
